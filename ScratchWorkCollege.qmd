@@ -7,7 +7,7 @@ editor: visual
 
 ```{r}
 
-Salary_df <- vroom::vroom("Stat 469/Salary.csv")
+Salary_df <- vroom::vroom("Salary.csv")
 ```
 
 CAN YOU SEE THIS?!
