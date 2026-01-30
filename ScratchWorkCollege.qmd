@@ -1,0 +1,12 @@
+---
+title: "College Scratch"
+author: "Corbin B; Matthew W"
+format: pdf
+editor: visual
+---
+
+```{r}
+
+
+```
+
