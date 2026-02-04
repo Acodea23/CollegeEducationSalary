@@ -8,6 +8,20 @@ editor: visual
 ```{r}
 
 Salary_df <- vroom::vroom("Salary.csv")
+
+sal_df <- sal_df |>
+  mutate(
+    MajorCategory = factor(MajorCategory),
+    Sex = factor(Sex)
+  )
+
+sal_lm<-lm(Salary~ .,sal_df)
 ```
 
-CAN YOU SEE THIS?!
+## Impact of GPA
+
+## Salaries Across Majors
+
+## Salaries for Women and Men
+
+## Other Factors
