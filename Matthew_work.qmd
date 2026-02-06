@@ -5,3 +5,15 @@ format: pdf
 editor: visual
 ---
 
+```{r}
+
+sal_df <- vroom::vroom("Salary.csv")
+
+sal_df$MajorCategory <- as.factor(sal_df$MajorCategory)
+sal_df$Sex <- as.factor(sal_df$Sex)
+```
+
+```{r}
+
+
+```

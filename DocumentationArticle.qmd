@@ -1,0 +1,10 @@
+---
+title: "Documentation Article"
+author: "Corbin Brinkerhoff, Matthew Wilson"
+format: pdf
+editor: visual
+---
+
+$$
+\mathbf{y} \sim \mathcal{N}(\mathbf{X}\mathbf{\beta},\sigma^2\mathbf{I})
+$$

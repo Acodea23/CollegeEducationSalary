@@ -9,6 +9,13 @@ editor: visual
 
 library(tidyverse)
 
+<<<<<<< HEAD
+=======
+```
+
+```{r}
+
+>>>>>>> 3f3db69cae5d5eea9f1cadd399a715d98dabcb6a
 sal_df <- vroom::vroom("Salary.csv")
 
 sal_df <- sal_df |>
@@ -170,7 +177,18 @@ print(drop1(sal_lm_int_GPA_MAJ, test = "F"))
 
 ```
 
-## Salaries Across Majors
+## Salaries Across Majors - Matthew
+
+```{r}
+
+# linear model predicting Salary by Major Category
+maj_lm <- lm(Salary ~ MajorCategory, data = sal_df)
+summary(maj_lm)
+
+
+```
+
+Yes, we see that "Engineering", "Computers and Mathematics", and "Physical Sciences" make the most when ignoring all other varaibles.
 
 ## Salaries for Women and Men - Corbin
 
@@ -184,4 +202,20 @@ summary(sal_lm_sex_major)
 
 ```
 
-## Other Factors
+## Other Factors - Matthew
+
+```{r}
+
+# linear model using all predictors and no interactions
+sal_lm<-lm(Salary~ .,sal_df)
+
+# linear model using all predictors and interactions found to be significant:
+sal_interaction_lm <- lm(Salary ~ MajorCategory * Sex + MajorCategory * GPA, data = sal_df)
+
+
+anova(sal_lm, sal_interaction_lm)
+summary(sal_interaction_lm)
+
+
+
+```
