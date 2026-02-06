@@ -5,6 +5,26 @@ format: pdf
 editor: visual
 ---
 
+## Statistical Model
+
+#### Mathematical Model
+
 $$
 \mathbf{y} \sim \mathcal{N}(\mathbf{X}\mathbf{\beta},\sigma^2\mathbf{I})
 $$
+
+#### Prediction Justification
+
+## Model Description
+
+#### Sect 2
+
+#### Sect 3
+
+#### Sect 4
+
+#### Sect 5
+
+## Code Appendix
+
+## 
