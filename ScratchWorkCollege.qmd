@@ -114,43 +114,7 @@ per_major_gpa_effects <- function(model, major_var = "MajorCategory", gpa_var = 
     arrange(MajorCategory)
 }
 
-# -------------------------
-# 1) Per-major GPA slopes (beta, p, CI)
-# -------------------------
-gpa_by_major_tbl <- per_major_gpa_effects(
-  model     = sal_lm_int_GPA_MAJ,
-  major_var = "MajorCategory",
-  gpa_var   = "GPA",
-  level     = 0.95
-)
 
-cat("\n=== GPA slope within each MajorCategory (beta, p, 95% CI) ===\n")
-gpa_by_major_tbl |>
-  mutate(
-    across(c(estimate, conf_low, conf_high), ~round(.x, 3)),
-    p_value = signif(p_value, 3)
-  ) |>
-  print(n = Inf)
-
-# -------------------------
-# 2) Raw interaction terms (difference vs. reference major) + 95% CI
-# -------------------------
-sm_int <- summary(sal_lm_int_GPA_MAJ)
-cf_mat <- sm_int$coefficients
-ci_all <- confint(sal_lm_int_GPA_MAJ, level = 0.95)
-
-interaction_rows <- rownames(cf_mat)[
-  grepl("^GPA:MajorCategory|^MajorCategory.+:GPA$", rownames(cf_mat))
-]
-
-interaction_tbl <- tibble(
-  term      = interaction_rows,
-  estimate  = cf_mat[interaction_rows, "Estimate"],
-  p_value   = cf_mat[interaction_rows, "Pr(>|t|)"],
-  conf_low  = ci_all[interaction_rows, 1],
-  conf_high = ci_all[interaction_rows, 2]
-) |>
-  arrange(term)
 
 cat("\n=== Interaction terms: difference in GPA slope vs. reference major ===\n")
 interaction_tbl |>
@@ -170,6 +134,10 @@ cat("\n=== Drop1 test (joint test of GPA:MajorCategory block) ===\n")
 print(drop1(sal_lm_int_GPA_MAJ, test = "F"))
 
 
+
+
+
+#MAKE PREDICTION FOR THIS
 
 
 ```
