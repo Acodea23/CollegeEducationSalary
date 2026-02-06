@@ -9,13 +9,10 @@ editor: visual
 
 library(tidyverse)
 
-<<<<<<< HEAD
-=======
 ```
 
 ```{r}
 
->>>>>>> 3f3db69cae5d5eea9f1cadd399a715d98dabcb6a
 sal_df <- vroom::vroom("Salary.csv")
 
 sal_df <- sal_df |>
