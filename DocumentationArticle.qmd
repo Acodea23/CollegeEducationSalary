@@ -15,11 +15,38 @@ $$
 
 #### Prediction Justification
 
+```{r}
+cross_validate <- function(k){
+  val_set <- sal_df |> filter(folds == k)
+  train_set <- sal_df |> filter(folds != k)
+  
+  preds <- predict.lm(lm(Salary ~ MajorCategory * Sex + MajorCategory * GPA, data = train_set),
+            newdata = val_set)
+  sqrt(mean((preds - val_set[["Salary"]])^2))
+}
+
+K <- 5
+
+folds <- rep(1:K, length = nrow(sal_df))|>
+  sample()
+
+
+rmse_results <- sapply(1:K, FUN = cross_validate)
+
+print(sd(sal_df[["Salary"]]))
+print(mean(rmse_results))
+print(summary(rmse_results))
+```
+
+We can see that our model does decently well in predicting the variance in salary compared to the variance of the salaries in the data set.
+
 ## Model Description
 
 #### Sect 2
 
 #### Sect 3
+
+We created a linear model using major to predict salary. We then looked at the F-statistic for the model and saw that major was significant. We then looked at the beta coefficients of the different majors to determine which majors had the largest positive coefficients as that indicated which majors had the highest salaries on average.
 
 #### Sect 4
 

@@ -213,6 +213,8 @@ sal_interaction_lm <- lm(Salary ~ MajorCategory * Sex + MajorCategory * GPA, dat
 anova(sal_lm, sal_interaction_lm)
 summary(sal_interaction_lm)
 
+par(mfrow = c(2,2))
+plot(sal_interaction_lm)
 
 
 ```
