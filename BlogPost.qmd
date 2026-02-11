@@ -164,18 +164,7 @@ ggplot(major_diffs_plot, aes(x = MajorCategory, y = diff_M_minus_F, fill = sign)
 
 ## 5. Other Factors — The Value of a College Education
 
-### Problem Background
-
--   **Predictors of Salary:**\
-    {{Describe how well your dataset’s existing variables explain or predict salary outcomes.}}
-
--   **Missing or Additional Variables:**\
-    {{List important factors not included in the dataset that likely influence salary (e.g., internships, geographic location, work experience).}}
-
--   **Specific Example Demonstrating Prediction Quality:**\
-    {{Walk through one specific example that illustrates how well—or poorly—your model or variables predict salary.}}
-
-    Our model will predict the salary of a person, and on average be off by about \$5700. We currently are using a person's Major, GPA, and sex to predict their salary. There are other variables that would potentially help us to better predict salary, including but not limited to times changing industries, continued eduction (i.e. a Master's Program), and geographic locations. All of these are factors that partially determine a salary. Another potential determinant is how much they liked their major, as a person who likes their work is more likely to perform well and get raises. To give an example of our predicition compared to the true salaries, we randomly selected a person from the dataset, and predicted their salary. We predicted a salary of "\$XXXX", and they had a salary of XXXX dollars. So we were off by XXXX dollars.
+Our model will predict the salary of a person, and on average be off by about \$5700. We currently are using a person's Major, GPA, and sex to predict their salary. There are other variables that would potentially help us to better predict salary, including but not limited to times changing industries, continued education (i.e. a Master's Program), and geographic locations. All of these are factors that partially determine a salary. Another potential determinant is how much they liked their major, as a person who likes their work is more likely to perform well and get raises. To give an example of our prediction compared to the true salaries, we randomly selected a person from the data set, and predicted their salary. The person selected was a female Communications and Journalism major with a GPA of 3.76. We predicted a salary of \$81694, and they had a salary of \$77300 dollars. So we over estimated their income by \$4394.
 
 ------------------------------------------------------------------------
 

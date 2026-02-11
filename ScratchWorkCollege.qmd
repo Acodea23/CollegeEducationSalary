@@ -288,6 +288,25 @@ print(mean(rmse_results))
 print(summary(rmse_results))
 ```
 
+## prediction for part 5
+
+```{r}
+set.seed(545)
+
+# randomly selecting a person from the df
+pick <- sample(1:length(sal_df$Salary),1)
+
+# gets explanatory variables for that person
+info <- as.data.frame(sal_df)[pick,2:4]
+
+#makes prediction for salary
+prediction <- predict(sal_lm, info)
+
+#prints explanatory variables, and also difference between prediciton and actual salary.
+print(info)
+print(prediction - sal_df$Salary[pick])
+```
+
 ## Model Validation
 
 ```{r}
