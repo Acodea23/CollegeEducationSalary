@@ -1,0 +1,312 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={BlogPost},
+  pdfauthor={Corbin Brinkerhoff, Matthew Wilson},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{BlogPost}
+\author{Corbin Brinkerhoff, Matthew Wilson}
+\date{}
+\begin{document}
+\maketitle
+
+
+\section{What Should You Really Expect to Earn Five Years After
+College?}\label{what-should-you-really-expect-to-earn-five-years-after-college}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1. Introduction}\label{introduction}
+
+Choosing a college major or stressing over grades can feel like
+decisions that will shape the rest of your life, and many students
+wonder what these choices actually mean for their future income. To help
+answer these questions, we analyzed real data from the American
+Community Survey to understand how college graduates are doing five
+years after earning their degree. In this article, we break down how
+factors like GPA, major, and gender relate to salary in the early career
+years without the confusing technical language. Whether you're a current
+student, a recent graduate, or someone advising the next generation,
+this guide is designed to give you a clear, data‑driven look at what
+influences earnings and what matters less than you might think.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. Impact of GPA}\label{impact-of-gpa}
+
+When looking at how grades relate to future earnings, the data shows a
+real, though not overwhelming, connection. On average, each one‑point
+increase in GPA is linked to earning about \$5,400 more per year, and
+the true effect is very likely somewhere between \$4,700 and \$6,100. So
+yes, GPA does matter, but not in the ``your life depends on perfect
+grades'' way that many students fear. A strong GPA can give you a
+helpful boost, but it's far from the only factor shaping your salary
+after graduation. Interestingly, the importance of GPA also shifts
+depending on what you study. While differences across majors aren't
+huge, some fields reward high academic performance more consistently
+than others. In these majors, employers may view GPA as a stronger
+signal of technical skill or work ethic. In other areas, experience,
+internships, or portfolios might speak louder than a transcript.
+Overall, GPA matters but it shouldn't be a source of extreme stress.
+It's one piece of a much bigger career puzzle.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. Salaries Across Majors}\label{salaries-across-majors}
+
+\begin{itemize}
+\item
+  \textbf{Differences in salary by major:}\\
+  \{\{State whether your dataset shows significant salary differences
+  among majors.\}\}
+\item
+  \textbf{High‑Earning Majors:}\\
+  \{\{List or describe which majors appear to earn the highest salaries
+  based on your data.\}\}
+\end{itemize}
+
+\pandocbounded{\includegraphics[keepaspectratio]{BlogPost_files/figure-pdf/unnamed-chunk-1-1.pdf}}
+
+\begin{verbatim}
+There is a difference in salary for different majors. We found that the average salary 5 years after graduating is highest for **Engineering, Computers and Mathematics, and Physical Sciences.**
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4. Salaries for Women and
+Men}\label{salaries-for-women-and-men}
+
+When comparing salaries between men and women within the same major
+category, the data reveals a persistent difference. Even after
+accounting for GPA and field of study, women earn about \$2,700 less per
+year than men on average. This gap doesn't look the same in every major,
+though some fields show very little difference, while others show
+noticeably larger ones. The interaction between gender and major
+indicates that in a few specific categories, the gap widens or narrows
+depending on the nature of the work or industry norms. For example, in
+some major categories, the salary difference swings by an additional
+\$1,000--\$2,300, either reducing or increasing the gap. Looking at your
+own major category, these patterns would highlight whether your field
+tends to reward men and women equally or whether a meaningful difference
+appears. While the exact reasons behind these gaps can be complex, the
+takeaway is clear: salary differences between men and women do exist,
+and they aren't the same across all majors. Understanding these patterns
+can help students make informed decisions and advocate more confidently
+when entering the job market.
+
+\pandocbounded{\includegraphics[keepaspectratio]{BlogPost_files/figure-pdf/unnamed-chunk-2-1.pdf}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{5. Other Factors --- The Value of a College
+Education}\label{other-factors-the-value-of-a-college-education}
+
+\subsubsection{Problem Background}\label{problem-background}
+
+\begin{itemize}
+\item
+  \textbf{Predictors of Salary:}\\
+  \{\{Describe how well your dataset's existing variables explain or
+  predict salary outcomes.\}\}
+\item
+  \textbf{Missing or Additional Variables:}\\
+  \{\{List important factors not included in the dataset that likely
+  influence salary (e.g., internships, geographic location, work
+  experience).\}\}
+\item
+  \textbf{Specific Example Demonstrating Prediction Quality:}\\
+  \{\{Walk through one specific example that illustrates how well---or
+  poorly---your model or variables predict salary.\}\}
+
+  Our model will predict the salary of a person, and on average be off
+  by about \$5700. We currently are using a person's Major, GPA, and sex
+  to predict their salary. There are other variables that would
+  potentially help us to better predict salary, including but not
+  limited to times changing industries, continued eduction (i.e.~a
+  Master's Program), and geographic locations. All of these are factors
+  that partially determine a salary. Another potential determinant is
+  how much they liked their major, as a person who likes their work is
+  more likely to perform well and get raises. To give an example of our
+  predicition compared to the true salaries, we randomly selected a
+  person from the dataset, and predicted their salary. We predicted a
+  salary of ``\$XXXX'', and they had a salary of XXXX dollars. So we
+  were off by XXXX dollars.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{6. Conclusions}\label{conclusions}
+
+\begin{itemize}
+\item
+  \textbf{Key Takeaways:}\\
+  \{\{State the main message readers should remember after reading the
+  article. Summarize your most important findings in 2--4 sentences.\}\}
+
+  Beats me
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+
+
+
+\end{document}

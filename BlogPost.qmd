@@ -92,6 +92,74 @@ There is a difference in salary for different majors. We found that the average 
 
 When comparing salaries between men and women within the same major category, the data reveals a persistent difference. Even after accounting for GPA and field of study, women earn about \$2,700 less per year than men on average. This gap doesn’t look the same in every major, though some fields show very little difference, while others show noticeably larger ones. The interaction between gender and major indicates that in a few specific categories, the gap widens or narrows depending on the nature of the work or industry norms. For example, in some major categories, the salary difference swings by an additional \$1,000–\$2,300, either reducing or increasing the gap. Looking at your own major category, these patterns would highlight whether your field tends to reward men and women equally or whether a meaningful difference appears. While the exact reasons behind these gaps can be complex, the takeaway is clear: salary differences between men and women do exist, and they aren’t the same across all majors. Understanding these patterns can help students make informed decisions and advocate more confidently when entering the job market.
 
+```{r}
+#| echo: false
+#| warning: false
+
+sal_lm_sex_major <- lm(
+  Salary ~ GPA + Sex * MajorCategory,
+  data = sal_df
+)
+
+library(dplyr)
+library(tidyr)
+
+# Ensure factors in newdata match the model's training data
+# If your model used Sex = c("Female","Male"), adjust the levels/labels accordingly.
+maj_df <- expand.grid(
+  MajorCategory = levels(sal_df$MajorCategory),
+  Sex           = c("F", "M"),
+  GPA           = 3.5,
+  KEEP.OUT.ATTRS = FALSE,
+  stringsAsFactors = FALSE
+) %>%
+  arrange(MajorCategory, Sex) %>%                 # ensure (Major, then F, then M)
+  mutate(
+    MajorCategory = factor(MajorCategory, levels = levels(sal_df$MajorCategory)),
+    Sex = factor(Sex, levels = levels(sal_df$Sex)) # IMPORTANT: match model levels
+  )
+
+# Predict for each row
+maj_df$pred <- predict(sal_lm_sex_major, newdata = maj_df)
+
+# Pivot to get columns pred_F and pred_M, then compute Male - Female
+major_diffs <- maj_df %>%
+  select(MajorCategory, Sex, pred) %>%
+  tidyr::pivot_wider(names_from = Sex, values_from = pred, names_prefix = "pred_") %>%
+  mutate(diff_M_minus_F = pred_M - pred_F) %>%
+  arrange(MajorCategory)
+
+library(ggplot2)
+library(dplyr)
+
+# If you want to sort majors by the size of the difference:
+major_diffs_plot <- major_diffs %>%
+  mutate(
+    # order by diff (largest positive at top after coord_flip)
+    MajorCategory = reorder(MajorCategory, diff_M_minus_F),
+    # color bars by direction of gap
+    sign = ifelse(diff_M_minus_F >= 0, "Male > Female", "Female > Male")
+  )
+
+ggplot(major_diffs_plot, aes(x = MajorCategory, y = diff_M_minus_F, fill = sign)) +
+  geom_col(width = 0.75) +
+  geom_hline(yintercept = 0, color = "gray30") +
+  coord_flip() +
+  scale_fill_manual(values = c("Male > Female" = "#1f77b4", "Female > Male" = "#d62728")) +
+  labs(
+    title = "Predicted Salary Difference of Male vs Female",
+    x = "Major Category",
+    y = "Difference (USD, Male − Female)",
+    fill = "Direction"
+  ) +
+  scale_y_continuous(labels = scales::label_dollar()) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.position = "top"
+  )
+```
+
 ------------------------------------------------------------------------
 
 ## 5. Other Factors — The Value of a College Education
