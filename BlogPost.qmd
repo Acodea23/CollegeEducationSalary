@@ -1,5 +1,5 @@
 ---
-title: "BlogPost"
+title: "Predicting Salary After College"
 author: "Corbin Brinkerhoff, Matthew Wilson"
 format: pdf
 editor: visual
@@ -22,12 +22,6 @@ When looking at how grades relate to future earnings, the data shows a real, tho
 ------------------------------------------------------------------------
 
 ## 3. Salaries Across Majors
-
--   **Differences in salary by major:**\
-    {{State whether your dataset shows significant salary differences among majors.}}
-
--   **High‑Earning Majors:**\
-    {{List or describe which majors appear to earn the highest salaries based on your data.}}
 
 ```{r}
 #| echo: false
@@ -104,7 +98,5 @@ Our model will predict the salary of a person, and on average be off by about \$
 
 -   **Key Takeaways:**\
     {{State the main message readers should remember after reading the article. Summarize your most important findings in 2–4 sentences.}}
-
-    Beats me
 
 ------------------------------------------------------------------------
