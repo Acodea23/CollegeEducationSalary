@@ -9,9 +9,9 @@ editor: visual
 
 #### Mathematical Model
 
-$$
-\mathbf{y} \sim \mathcal{N}(\mathbf{X}\mathbf{\beta},\sigma^2\mathbf{I})
-$$
+$\text{Salary}_i  = \beta_0  + \beta_1 \,\text{Sex}_i + \beta_j \,\text{Major}_{ij} + \beta_3 \,\text{GPA}_i + \varepsilon_i, \qquad  \varepsilon_i \sim \mathcal{N}(0,\sigma^2).$
+
+Here the $Major_{ij}$ indicates that the ith quantity for major is the jth major. And $\beta_j$ is the beta coefficient for the jth major
 
 #### Prediction Justification
 
