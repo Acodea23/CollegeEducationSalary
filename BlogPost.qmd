@@ -5,24 +5,19 @@ format: pdf
 editor: visual
 ---
 
-# {{Insert Catchy, Click‑Worthy Title Here}}
-
-{{Write a brief and engaging introduction summarizing the purpose of the article and why readers should care.}}
+# What Should You Really Expect to Earn Five Years After College?
 
 ------------------------------------------------------------------------
 
 ## 1. Introduction
 
--   **Catchy Headline:**\
-    {{Replace with the final title readers will see in the published article.}}
--   **Overview:**\
-    {{Provide a short summary describing what the article covers and the motivation behind it.}}
+Choosing a college major or stressing over grades can feel like decisions that will shape the rest of your life, and many students wonder what these choices actually mean for their future income. To help answer these questions, we analyzed real data from the American Community Survey to understand how college graduates are doing five years after earning their degree. In this article, we break down how factors like GPA, major, and gender relate to salary in the early career years without the confusing technical language. Whether you're a current student, a recent graduate, or someone advising the next generation, this guide is designed to give you a clear, data‑driven look at what influences earnings and what matters less than you might think.
 
 ------------------------------------------------------------------------
 
 ## 2. Impact of GPA
 
-Does GPA affect salary, and does it depend on major? The evidence suggests that GPA does matter for salary but not equally across all majors. When we allow the GPA–salary relationship to differ by major, the model fits the data better than a one-size-fits-all approach, showing that the impact of GPA genuinely varies by field of study. In particular, GPA appears to matter more in majors such as Business, Engineering, Industrial Arts, Law & Public Policy, Social Sciences, Psychology & Social Work, and Communications, where a one-point increase in GPA is linked to substantially higher earnings compared to the reference major, often on the order of \$9,000 to \$13,000 more per year, with reasonably precise ranges around those estimates. In contrast, for majors like Arts, Biology, Computers & Mathematics, Interdisciplinary studies, and Humanities, the differences are smaller and less certain, suggesting GPA plays a weaker role in shaping salaries in those fields. Overall, this pattern indicates that students should consider their major when thinking about grades: GPA clearly matters more in some careers than others, and while strong academic performance can pay off, especially in certain majors, being overly anxious about grades is unlikely to be necessary across the board.
+When looking at how grades relate to future earnings, the data shows a real, though not overwhelming, connection. On average, each one‑point increase in GPA is linked to earning about \$5,400 more per year, and the true effect is very likely somewhere between \$4,700 and \$6,100. So yes, GPA does matter, but not in the “your life depends on perfect grades” way that many students fear. A strong GPA can give you a helpful boost, but it’s far from the only factor shaping your salary after graduation. Interestingly, the importance of GPA also shifts depending on what you study. While differences across majors aren’t huge, some fields reward high academic performance more consistently than others. In these majors, employers may view GPA as a stronger signal of technical skill or work ethic. In other areas, experience, internships, or portfolios might speak louder than a transcript. Overall, GPA matters but it shouldn’t be a source of extreme stress. It’s one piece of a much bigger career puzzle.
 
 ------------------------------------------------------------------------
 
@@ -40,12 +35,7 @@ Does GPA affect salary, and does it depend on major? The evidence suggests that 
 
 ## 4. Salaries for Women and Men
 
--   **Gender Pay Differences Within Majors:**\
-    {{Summarize your findings about salary differences between men and women in the same major category.}}
--   **Variation by Major Category:**\
-    {{Explain whether the magnitude of the gender pay gap changes depending on the major.}}
--   **Example Using Your Group’s Major:**\
-    {{Provide a specific example comparing men’s vs. women’s salaries for your chosen major category. Include numbers, visuals, or tables if needed.}}
+When comparing salaries between men and women within the same major category, the data reveals a persistent difference. Even after accounting for GPA and field of study, women earn about \$2,700 less per year than men on average. This gap doesn’t look the same in every major, though some fields show very little difference, while others show noticeably larger ones. The interaction between gender and major indicates that in a few specific categories, the gap widens or narrows depending on the nature of the work or industry norms. For example, in some major categories, the salary difference swings by an additional \$1,000–\$2,300, either reducing or increasing the gap. Looking at your own major category, these patterns would highlight whether your field tends to reward men and women equally or whether a meaningful difference appears. While the exact reasons behind these gaps can be complex, the takeaway is clear: salary differences between men and women do exist, and they aren’t the same across all majors. Understanding these patterns can help students make informed decisions and advocate more confidently when entering the job market.
 
 ------------------------------------------------------------------------
 
