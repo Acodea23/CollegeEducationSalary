@@ -64,7 +64,6 @@ cat("GPA 95% CI         : [",
 
 # Recommended contrasts for Type III tests
 options(contrasts = c("contr.sum", "contr.poly"))
-library(car)
 car::Anova(sal_lm_int_GPA_MAJ, type = 3)
 ```
 
@@ -141,6 +140,72 @@ sal_lm_sex_major <- lm(
 
 summary(sal_lm_sex_major)
 
+```
+
+Prediction
+
+```{r}
+library(dplyr)
+library(tidyr)
+
+# Ensure factors in newdata match the model's training data
+# If your model used Sex = c("Female","Male"), adjust the levels/labels accordingly.
+maj_df <- expand.grid(
+  MajorCategory = levels(sal_df$MajorCategory),
+  Sex           = c("F", "M"),
+  GPA           = 3.5,
+  KEEP.OUT.ATTRS = FALSE,
+  stringsAsFactors = FALSE
+) %>%
+  arrange(MajorCategory, Sex) %>%                 # ensure (Major, then F, then M)
+  mutate(
+    MajorCategory = factor(MajorCategory, levels = levels(sal_df$MajorCategory)),
+    Sex = factor(Sex, levels = levels(sal_df$Sex)) # IMPORTANT: match model levels
+  )
+
+# Predict for each row
+maj_df$pred <- predict(sal_lm_sex_major, newdata = maj_df)
+
+# Pivot to get columns pred_F and pred_M, then compute Male - Female
+major_diffs <- maj_df %>%
+  select(MajorCategory, Sex, pred) %>%
+  tidyr::pivot_wider(names_from = Sex, values_from = pred, names_prefix = "pred_") %>%
+  mutate(diff_M_minus_F = pred_M - pred_F) %>%
+  arrange(MajorCategory)
+
+major_diffs
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+# If you want to sort majors by the size of the difference:
+major_diffs_plot <- major_diffs %>%
+  mutate(
+    # order by diff (largest positive at top after coord_flip)
+    MajorCategory = reorder(MajorCategory, diff_M_minus_F),
+    # color bars by direction of gap
+    sign = ifelse(diff_M_minus_F >= 0, "Male > Female", "Female > Male")
+  )
+
+ggplot(major_diffs_plot, aes(x = MajorCategory, y = diff_M_minus_F, fill = sign)) +
+  geom_col(width = 0.75) +
+  geom_hline(yintercept = 0, color = "gray30") +
+  coord_flip() +
+  scale_fill_manual(values = c("Male > Female" = "#1f77b4", "Female > Male" = "#d62728")) +
+  labs(
+    title = "Predicted Salary Difference of Male vs Female",
+    x = "Major Category",
+    y = "Difference (USD, Male − Female)",
+    fill = "Direction"
+  ) +
+  scale_y_continuous(labels = scales::label_dollar()) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.position = "top"
+  )
 ```
 
 ## Other Factors - Matthew
