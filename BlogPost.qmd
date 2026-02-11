@@ -29,7 +29,62 @@ When looking at how grades relate to future earnings, the data shows a real, tho
 -   **High‑Earning Majors:**\
     {{List or describe which majors appear to earn the highest salaries based on your data.}}
 
-    There is a difference in salary for different majors. We found that the average salary 5 years after graduating is highest for **Engineering, Computers and Mathematics, and Physical Sciences.**
+```{r}
+#| echo: false
+#| warning: false
+
+library(tidyverse)
+
+sal_df <- vroom::vroom("Salary.csv")
+
+sal_df <- sal_df |>
+  mutate(
+    MajorCategory = factor(MajorCategory),
+    Sex = factor(Sex)
+  )
+
+# creating a linear model. Salary predicted my Major, GPA and sex. No interaction
+sal_lm<-lm(Salary~ .,sal_df)
+
+# make df for diff majors holding constant of female w/ 3.5 GPA
+maj_df <- expand.grid(Sex = "F", GPA = 3.5, MajorCategory = unique(sal_df$MajorCategory))
+
+
+
+# Ensure you used the correct arg for base R lm
+maj_preds <- predict(sal_lm, newdata = maj_df, se.fit = TRUE)
+
+# Bind predictions back to maj_df
+plot_df <- maj_df %>%
+  mutate(
+    .pred = maj_preds$fit,
+  ) %>%
+  # Order majors by predicted value for a nicer chart
+  mutate(MajorCategory = reorder(MajorCategory, .pred))
+
+library(scales)
+
+ggplot(plot_df, aes(x = MajorCategory, y = .pred)) +
+  geom_col(fill = "#4472C4") +
+  coord_flip() +  # if you prefer horizontal bars (often easier to read)
+  scale_y_continuous(
+    breaks = scales::breaks_pretty(n = 5),      # more ticks
+    minor_breaks = waiver(),                     # add minor gridlines
+    labels = label_number(big.mark = ",")        # or label_dollar() if these are $ values
+    # e.g., labels = label_dollar(accuracy = 1)
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.minor.y = element_line(color = "grey85"),  # emphasize minor gridlines
+    panel.grid.major.y = element_line(color = "grey80")
+  ) +
+  labs(x = "Major category", y = "Predicted Salary", title = "Predicted Salary by Major")
+    
+```
+
+```         
+There is a difference in salary for different majors. We found that the average salary 5 years after graduating is highest for **Engineering, Computers and Mathematics, and Physical Sciences.**
+```
 
 ------------------------------------------------------------------------
 
@@ -64,5 +119,3 @@ When comparing salaries between men and women within the same major category, th
     Beats me
 
 ------------------------------------------------------------------------
-
-{{Optional: Add references, acknowledgments, or appendices if needed.}}
