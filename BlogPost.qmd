@@ -22,12 +22,7 @@ editor: visual
 
 ## 2. Impact of GPA
 
--   **Does GPA influence salary?**\
-    {{Explain your findings, referencing data or patterns from your dataset.}}
--   **Should students be anxious about grades?**\
-    {{Discuss whether GPA truly matters and include supporting arguments or data.}}
--   **Major‑Specific Effects:**\
-    {{Describe whether GPA matters more for certain majors and provide examples where relevant.}}
+Does GPA affect salary, and does it depend on major? The evidence suggests that GPA does matter for salary but not equally across all majors. When we allow the GPA–salary relationship to differ by major, the model fits the data better than a one-size-fits-all approach, showing that the impact of GPA genuinely varies by field of study. In particular, GPA appears to matter more in majors such as Business, Engineering, Industrial Arts, Law & Public Policy, Social Sciences, Psychology & Social Work, and Communications, where a one-point increase in GPA is linked to substantially higher earnings compared to the reference major, often on the order of \$9,000 to \$13,000 more per year, with reasonably precise ranges around those estimates. In contrast, for majors like Arts, Biology, Computers & Mathematics, Interdisciplinary studies, and Humanities, the differences are smaller and less certain, suggesting GPA plays a weaker role in shaping salaries in those fields. Overall, this pattern indicates that students should consider their major when thinking about grades: GPA clearly matters more in some careers than others, and while strong academic performance can pay off, especially in certain majors, being overly anxious about grades is unlikely to be necessary across the board.
 
 ------------------------------------------------------------------------
 
