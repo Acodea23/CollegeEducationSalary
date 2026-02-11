@@ -35,8 +35,11 @@ editor: visual
 
 -   **Differences in salary by major:**\
     {{State whether your dataset shows significant salary differences among majors.}}
+
 -   **High‑Earning Majors:**\
     {{List or describe which majors appear to earn the highest salaries based on your data.}}
+
+    There is a difference in salary for different majors. We found that the average salary 5 years after graduating is highest for **Engineering, Computers and Mathematics, and Physical Sciences.**
 
 ------------------------------------------------------------------------
 
@@ -57,10 +60,14 @@ editor: visual
 
 -   **Predictors of Salary:**\
     {{Describe how well your dataset’s existing variables explain or predict salary outcomes.}}
+
 -   **Missing or Additional Variables:**\
     {{List important factors not included in the dataset that likely influence salary (e.g., internships, geographic location, work experience).}}
+
 -   **Specific Example Demonstrating Prediction Quality:**\
     {{Walk through one specific example that illustrates how well—or poorly—your model or variables predict salary.}}
+
+    Our model will predict the salary of a person, and on average be off by about \$5700. We currently are using a person's Major, GPA, and sex to predict their salary. There are other variables that would potentially help us to better predict salary, including but not limited to times changing industries, continued eduction (i.e. a Master's Program), and geographic locations. All of these are factors that partially determine a salary. Another potential determinant is how much they liked their major, as a person who likes their work is more likely to perform well and get raises. To give an example of our predicition compared to the true salaries, we randomly selected a person from the dataset, and predicted their salary. We predicted a salary of "\$XXXX", and they had a salary of XXXX dollars. So we were off by XXXX dollars.
 
 ------------------------------------------------------------------------
 
@@ -68,6 +75,8 @@ editor: visual
 
 -   **Key Takeaways:**\
     {{State the main message readers should remember after reading the article. Summarize your most important findings in 2–4 sentences.}}
+
+    Beats me
 
 ------------------------------------------------------------------------
 

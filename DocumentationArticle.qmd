@@ -16,11 +16,23 @@ $$
 #### Prediction Justification
 
 ```{r}
+library(tidyverse)
+```
+
+```{r}
+sal_df <- vroom::vroom("Salary.csv")
+
+sal_df <- sal_df |>
+  mutate(
+    MajorCategory = factor(MajorCategory),
+    Sex = factor(Sex)
+  )
+
 cross_validate <- function(k){
   val_set <- sal_df |> filter(folds == k)
   train_set <- sal_df |> filter(folds != k)
   
-  preds <- predict.lm(lm(Salary ~ MajorCategory * Sex + MajorCategory * GPA, data = train_set),
+  preds <- predict.lm(lm(Salary ~ MajorCategory + Sex + GPA, data = train_set),
             newdata = val_set)
   sqrt(mean((preds - val_set[["Salary"]])^2))
 }
@@ -38,9 +50,7 @@ print(mean(rmse_results))
 print(summary(rmse_results))
 ```
 
-We can see that our model does decently well in predicting the variance in salary compared to the variance of the salaries in the data set.
-
-## Model Description
+We performed k-fold CV and used the metric of RMSE. We can see that our model does decently well in predicting the variance in salary compared to the variance of the salaries in the data set. We can also see that the results are rather consistent across folds. Model Description
 
 #### Sect 2
 
@@ -51,6 +61,8 @@ We created a linear model using major to predict salary. We then looked at the F
 #### Sect 4
 
 #### Sect 5
+
+We compared models with and without interactions. The F-test showed the model with interactions was significant. But their adjusted R-squared values are similar, and the K-fold CV results show that the predictive RMSE is similar. So we consider the simpler model to be a better choice. We also compared our predictive rmse to the sd of the dataset and saw that our rmse was significantly smaller than the sd, which means it better explained the variance in the data.
 
 ## Code Appendix
 

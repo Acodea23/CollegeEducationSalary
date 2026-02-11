@@ -7,12 +7,15 @@ editor: visual
 
 ```{r}
 
+#library for data cleaning and graphs
+
 library(tidyverse)
 
 ```
 
 ```{r}
 
+# reading in data and creating factors
 sal_df <- vroom::vroom("Salary.csv")
 
 sal_df <- sal_df |>
@@ -21,7 +24,9 @@ sal_df <- sal_df |>
     Sex = factor(Sex)
   )
 
+# creating a linear model. Salary predicted my Major, GPA and sex. No interaction
 sal_lm<-lm(Salary~ .,sal_df)
+#linear model that includes an interaction between GPA and MajorCategory
 sal_lm_int_GPA_MAJ  <- lm(Salary ~ GPA * MajorCategory + Sex, data = sal_df)
 
 head(sal_df)
@@ -178,14 +183,65 @@ print(drop1(sal_lm_int_GPA_MAJ, test = "F"))
 
 ```{r}
 
-# linear model predicting Salary by Major Category
-maj_lm <- lm(Salary ~ MajorCategory, data = sal_df)
-summary(maj_lm)
+# code to perform f-test between base lm, and an lm that doesn't include Major
+print(anova(sal_lm, lm(Salary~ -MajorCategory,sal_df)))
+
+# we see that major is significant, so now we view the summary of the model with major.
+summary(sal_lm)
+
+maj_df <- expand.grid(Sex = "F", GPA = 3.5, MajorCategory = unique(sal_df$MajorCategory))
+
+maj_preds <- predict(sal_lm, new_data = as.data.frame(maj_df))
+
+```
+
+Yes, we see that "Engineering", "Computers and Mathematics", and "Physical Sciences" make the most.
+
+```{r}
+
+# make df for diff majors holding constant of female w/ 3.5 GPA
+maj_df <- expand.grid(Sex = "F", GPA = 3.5, MajorCategory = unique(sal_df$MajorCategory))
+
+# predict salaries for diff majors
+maj_preds <- predict(sal_lm, newdata = maj_df)
+
+ggplot(data = maj_preds)+
+  geom_bar()
 
 
 ```
 
-Yes, we see that "Engineering", "Computers and Mathematics", and "Physical Sciences" make the most when ignoring all other varaibles.
+```{r}
+
+# Ensure you used the correct arg for base R lm
+maj_preds <- predict(sal_lm, newdata = maj_df, se.fit = TRUE)
+
+# Bind predictions back to maj_df
+plot_df <- maj_df %>%
+  mutate(
+    .pred = maj_preds$fit,
+  ) %>%
+  # Order majors by predicted value for a nicer chart
+  mutate(MajorCategory = reorder(MajorCategory, .pred))
+
+library(scales)
+
+ggplot(plot_df, aes(x = MajorCategory, y = .pred)) +
+  geom_col(fill = "#4472C4") +
+  coord_flip() +  # if you prefer horizontal bars (often easier to read)
+  scale_y_continuous(
+    breaks = scales::breaks_pretty(n = 5),      # more ticks
+    minor_breaks = waiver(),                     # add minor gridlines
+    labels = label_number(big.mark = ",")        # or label_dollar() if these are $ values
+    # e.g., labels = label_dollar(accuracy = 1)
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.minor.y = element_line(color = "grey85"),  # emphasize minor gridlines
+    panel.grid.major.y = element_line(color = "grey80")
+  ) +
+  labs(x = "Major category", y = "Predicted Salary", title = "Predicted Salary by Major")
+```
 
 ## Salaries for Women and Men - Corbin
 
@@ -203,18 +259,88 @@ summary(sal_lm_sex_major)
 
 ```{r}
 
-# linear model using all predictors and no interactions
+# linear model using all predictors and no interactions. As seen above, just defined again for clarity
 sal_lm<-lm(Salary~ .,sal_df)
 
 # linear model using all predictors and interactions found to be significant:
 sal_interaction_lm <- lm(Salary ~ MajorCategory * Sex + MajorCategory * GPA, data = sal_df)
 
 
-anova(sal_lm, sal_interaction_lm)
-summary(sal_interaction_lm)
 
+# par(mfrow = c(2,2))
+# plot(sal_interaction_lm)
+
+# function to perform k-fold cv for a single fold.
+# take input of k, the kth fold
+# calculates rmse for the models with and without interactions
+# returns difference of rmse of the 2
+
+cross_validate <- function(k){
+  val_set <- sal_df |> filter(folds == k)
+  train_set <- sal_df |> filter(folds != k)
+  
+  preds_1 <- predict.lm(lm(Salary ~ MajorCategory * Sex + MajorCategory * GPA, data = train_set),
+            newdata = val_set)
+  rmse_1 <- sqrt(mean((preds_1 - val_set[["Salary"]])^2))
+  
+  preds_2 <- predict.lm(lm(Salary ~ MajorCategory + Sex + GPA, data = train_set),
+            newdata = val_set)
+  rmse_2 <- sqrt(mean((preds_2 - val_set[["Salary"]])^2))
+  
+  rmse_1 - rmse_2
+}
+
+K <- 20
+
+# randomly creates partitions for folds
+folds <- rep(1:K, length = nrow(sal_df))|>
+  sample()
+
+
+rmse_results <- sapply(1:K, FUN = cross_validate)
+
+# results of k-fold validation comparison
+print(summary(rmse_results))
+hist(rmse_results)
+
+
+
+```
+
+```{r}
+
+# function similar to above
+#instead of finding difference, just calclates rmse for 1 and returns it
+cross_validate_one <- function(k){
+  val_set <- sal_df |> filter(folds == k)
+  train_set <- sal_df |> filter(folds != k)
+  
+  preds <- predict.lm(lm(Salary ~ Sex + MajorCategory + GPA, data = train_set),
+            newdata = val_set)
+  sqrt(mean((preds - val_set[["Salary"]])^2))
+}
+
+K <- 20
+
+# see above cell
+folds <- rep(1:K, length = nrow(sal_df))|>
+  sample()
+
+
+rmse_results <- sapply(1:K, FUN = cross_validate_one)
+
+# statistics from k_folds
+print(sd(sal_df[["Salary"]]))
+print(mean(rmse_results))
+print(summary(rmse_results))
+```
+
+## Model Validation
+
+```{r}
+
+# creates a plot of various lm assumptions
 par(mfrow = c(2,2))
-plot(sal_interaction_lm)
-
+plot(sal_lm)
 
 ```
