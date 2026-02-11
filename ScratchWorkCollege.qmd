@@ -94,8 +94,7 @@ maj_df <- expand.grid(Sex = "F", GPA = 3.5, MajorCategory = unique(sal_df$MajorC
 # predict salaries for diff majors
 maj_preds <- predict(sal_lm, newdata = maj_df)
 
-ggplot(data = maj_preds)+
-  geom_bar()
+
 
 
 ```
@@ -222,6 +221,21 @@ rmse_results <- sapply(1:K, FUN = cross_validate_one)
 print(sd(sal_df[["Salary"]]))
 print(mean(rmse_results))
 print(summary(rmse_results))
+```
+
+## prediction for part 5
+
+```{r}
+set.seed(545)
+pick <- sample(1:length(sal_df$Salary),1)
+
+info <- as.data.frame(sal_df)[pick,2:4]
+
+prediction <- predict(sal_lm, info)
+
+print(prediction)
+print(sal_df$Salary[pick])
+print(prediction - sal_df$Salary[pick])
 ```
 
 ## Model Validation
