@@ -54,11 +54,15 @@ We performed k-fold CV and used the metric of RMSE. We can see that our model do
 
 #### Sect 2
 
+We fit a linear regression of salary on GPA (`sal_lm`), then extracted the GPA slope (Beta Hat) and its two‑sided t‑test p‑value from `summary(sal_lm)$coefficients` to test H0: Beta(GPA) = 0. We quantified uncertainty by computing the 95% Wald confidence interval for Beta(GPA) with `confint(sal_lm, "GPA", level = 0.95)` and printed the estimate, p‑value, and CI using `cat(...)` with light rounding. To assess moderation by Major and obtain adjusted main‑effect tests in the presence of an interaction, we set sum‑to‑zero contrasts (`options(contrasts =     ("contr.sum","contr.poly"))`) and ran a Type III ANOVA on `sal_lm_int_GPA_MAJ` via `car::Anova(..., type = 3)`. Interpretation uses the simple model for the marginal GPA effect (estimate, p‑value, CI) and the Type III ANOVA to determine whether GPA’s slope varies by Major (interaction) and to evaluate adjusted main effects.
+
 #### Sect 3
 
 We created a linear model using major to predict salary. We then looked at the F-statistic for the model and saw that major was significant. We then looked at the beta coefficients of the different majors to determine which majors had the largest positive coefficients as that indicated which majors had the highest salaries on average.
 
 #### Sect 4
+
+We fit a linear model \`Salary \~ GPA + Sex \* MajorCategory\` (adjusting for GPA) and examined \`summary(sal_lm_sex_major)\` to assess main effects and the Sex × MajorCategory interaction. We generated a balanced prediction grid over all \`MajorCategory\` levels crossed with \`Sex ∈ {F, M}\` at a fixed GPA of 3.5, ensuring factor levels in \`newdata\` matched the model’s training levels, and obtained fitted values via \`predict()\`. We reshaped predictions to wide format to compute the within major gender gap Delta (difference) = (Salary of Males - Salary of Female) at GPA 3.5 for each major. Finally, we visualized these gaps with a horizontal bar chart (ggplot2), ordering majors by Delta and coloring bars by direction (“Male \> Female” vs. “Female \> Male”) to highlight both magnitude and sign of predicted differences.
 
 #### Sect 5
 
