@@ -15,23 +15,37 @@ Here the $Major_{ij}$ indicates that the ith quantity for major is the jth major
 
 #### Prediction Justification
 
-We performed k-fold CV and used the metric of RMSE. We can see that our model does decently well in predicting the variance in salary compared to the variance of the salaries in the data set. We can also see that the results are rather consistent across folds.
+We evaluated our model using K-fold cross-validation with RMSE as the performance metric. The results show that the model predicts salary reasonably well relative to the overall variability in salaries in the dataset, and the RMSE values were stable across folds, indicating consistent predictive performance.
 
-#### Sect 2
+#### Section 2
 
-We fit a linear regression of salary on GPA (`sal_lm`), then extracted the GPA slope (Beta Hat) and its two‑sided t‑test p‑value from `summary(sal_lm)$coefficients` to test H0: Beta(GPA) = 0. We quantified uncertainty by computing the 95% Wald confidence interval for Beta(GPA) with `confint(sal_lm, "GPA", level = 0.95)` and printed the estimate, p‑value, and CI using `cat(...)` with light rounding. To assess moderation by Major and obtain adjusted main‑effect tests in the presence of an interaction, we set sum‑to‑zero contrasts (`options(contrasts =     ("contr.sum","contr.poly"))`) and ran a Type III ANOVA on `sal_lm_int_GPA_MAJ` via `car::Anova(..., type = 3)`. Interpretation uses the simple model for the marginal GPA effect (estimate, p‑value, CI) and the Type III ANOVA to determine whether GPA’s slope varies by Major (interaction) and to evaluate adjusted main effects.
+We first fit a simple linear regression of Salary on GPA (`sal_lm`). From the model summary, we extracted the estimated GPA slope (β̂) and its two‑sided t‑test p‑value to test the hypothesis that the GPA coefficient equals zero. To quantify uncertainty, we computed the 95% Wald confidence interval for the GPA coefficient using `confint(sal_lm, "GPA", level = 0.95)` and reported the estimate, p‑value, and confidence interval.
 
-#### Sect 3
+To investigate whether the effect of GPA varied by Major, we introduced a GPA × Major interaction term. Because interactions require adjusted main‑effect tests, we used sum‑to‑zero contrasts (`options(contrasts = c("contr.sum", "contr.poly"))`) and conducted a Type III ANOVA with `car::Anova(..., type = 3)` on the interaction model (`sal_lm_int_GPA_MAJ`). Interpretation combines the simple model’s marginal GPA effect with the Type III ANOVA results to determine whether the GPA slope differs meaningfully across majors.
 
-We created a linear model using major to predict salary. We then looked at the F-statistic for the model and saw that major was significant. We then looked at the beta coefficients of the different majors to determine which majors had the largest positive coefficients as that indicated which majors had the highest salaries on average.
+#### Section 3
 
-#### Sect 4
+Next, we fit a linear regression model using Major as the sole predictor of salary. The F‑statistic for this model indicated that Major is a statistically significant predictor of salary. We then examined the estimated coefficients for each Major category to identify which majors were associated with higher average salaries.
 
-We fit a linear model \`Salary \~ GPA + Sex \* MajorCategory\` (adjusting for GPA) and examined \`summary(sal_lm_sex_major)\` to assess main effects and the Sex × MajorCategory interaction. We generated a balanced prediction grid over all \`MajorCategory\` levels crossed with \`Sex ∈ {F, M}\` at a fixed GPA of 3.5, ensuring factor levels in \`newdata\` matched the model’s training levels, and obtained fitted values via \`predict()\`. We reshaped predictions to wide format to compute the within major gender gap Delta (difference) = (Salary of Males - Salary of Female) at GPA 3.5 for each major. Finally, we visualized these gaps with a horizontal bar chart (ggplot2), ordering majors by Delta and coloring bars by direction (“Male \> Female” vs. “Female \> Male”) to highlight both magnitude and sign of predicted differences.
+#### Section 4
 
-#### Sect 5
+We extended our analysis by fitting a model of the form `Salary ~ GPA + Sex * MajorCategory`, which adjusts for GPA while allowing Sex × MajorCategory interactions.
 
-We compared models with and without interactions. The F-test showed the model with interactions was significant. But their adjusted R-squared values are similar, and the K-fold CV results show that the predictive RMSE is similar. So we consider the simpler model to be a better choice. We also compared our predictive rmse to the sd of the dataset and saw that our rmse was significantly smaller than the sd, which means it better explained the variance in the data.
+Using `summary(sal_lm_sex_major)`, we evaluated the significance of the main effects and interaction. To interpret these effects, we created a balanced prediction grid containing all combinations of MajorCategory and Sex (Male and Female) at a fixed GPA of 3.5. After ensuring factor levels matched those of the training data, we obtained predicted salaries with `predict()`.
+
+We then reshaped the predictions to compute the predicted gender salary gap for each major:
+
+```         
+Delta = Salary(Male) – Salary(Female)
+```
+
+Finally, we visualized these gaps using a horizontal bar chart, ordering majors by the magnitude of the difference and coloring bars by direction (“Male \> Female” vs. “Female \> Male”).
+
+#### Section 5
+
+To compare model complexity and predictive performance, we evaluated models with and without interaction terms. Although the F‑test suggested that the interaction model was significant, its adjusted R² was nearly identical to the simpler model. K‑fold CV also showed that the predictive RMSEs were similar. Given the minimal improvement in predictive accuracy, we prefer the simpler model.
+
+We also compared the models’ predictive RMSE to the standard deviation of salaries in the dataset. Because the RMSE was much smaller than the standard deviation, the model explains a meaningful portion of salary variability.
 
 ## Code Appendix
 
