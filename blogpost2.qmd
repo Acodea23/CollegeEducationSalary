@@ -1,13 +1,14 @@
 ---
-title: "Predicting Salary After College"
-author: "Corbin Brinkerhoff, Matthew Wilson"
-format: pdf
-editor: visual
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-# What Should You Really Expect to Earn Five Years After College?
+# Predicting Salary After College
 
-------------------------------------------------------------------------
+# Corbin Brinkerhoff, Matthew Wilson
+
+## What Should You Really Expect to Earn Five Years After College?
 
 ## 1. Introduction
 
