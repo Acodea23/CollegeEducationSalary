@@ -15,7 +15,7 @@ Here the $Major_{ij}$ indicates that the ith quantity for major is the jth major
 
 #### Prediction Justification
 
-We performed k-fold CV and used the metric of RMSE. We can see that our model does decently well in predicting the variance in salary compared to the variance of the salaries in the data set. We can also see that the results are rather consistent across folds. Model Description
+We performed k-fold CV and used the metric of RMSE. We can see that our model does decently well in predicting the variance in salary compared to the variance of the salaries in the data set. We can also see that the results are rather consistent across folds.
 
 #### Sect 2
 
