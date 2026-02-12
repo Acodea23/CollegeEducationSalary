@@ -219,10 +219,6 @@ sal_lm<-lm(Salary~ .,sal_df)
 sal_interaction_lm <- lm(Salary ~ MajorCategory * Sex + MajorCategory * GPA, data = sal_df)
 
 
-
-# par(mfrow = c(2,2))
-# plot(sal_interaction_lm)
-
 # function to perform k-fold cv for a single fold.
 # take input of k, the kth fold
 # calculates rmse for the models with and without interactions
