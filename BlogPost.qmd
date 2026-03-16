@@ -17,7 +17,7 @@ In this article, we walk through how factors like GPA, major, and gender relate 
 
 ## 2. Impact of GPA
 
-When looking at how grades relate to future earnings, the data shows a rea, though not overwhelming, connection. On average, each one‑point increase in GPA is linked to earning about **\$5,400 more per year**, with the true impact ranging between \$4,700 and \$6,100 for a person. So yes, GPA does matter, but not in the “your life depends on perfect grades” way that many students fear. A strong GPA can give you a meaningful boost, but it’s far from the only thing shaping your salary after graduation.
+When looking at how grades relate to future earnings, the data shows a real, though not overwhelming, connection. On average, each one‑point increase in GPA is linked to earning about **\$5,400 more per year**, with the true impact ranging between \$4,700 and \$6,100 for a person. So yes, GPA does matter, but not in the “your life depends on perfect grades” way that many students fear. A strong GPA can give you a meaningful boost, but it’s far from the only thing shaping your salary after graduation.
 
 Interestingly, the importance of GPA shifts depending on what you study. While differences across majors aren’t huge, some fields seem to reward high academic performance more consistently than others. In those majors, employers may view GPA as a stronger signal of technical skill or work ethic. In other areas, experience, internships, or a strong portfolio speak louder than a transcript.
 
@@ -86,13 +86,13 @@ These majors consistently lead to higher predicted salaries. While salary should
 
 ## 4. Salaries for Women and Men
 
-When comparing salaries between men and women within the same major category, we see a persistent difference. Even after accounting for GPA and field of study, **women earn about \$2,700 less per year** than men on average.
+If you've ever wondered whether your college major affects how fairly you're paid compared to your peers of a different gender, the answer is yes.
 
-This gap isn’t identical in every field. Some majors show very small differences, while others have noticeably larger ones. In fact, the interaction between gender and major shows that in certain categories, the salary gap can **widen or narrow** by an **additional** \$1,000–\$2,300, depending on the nature of the work and industry norms.
+After analyzing salary data across thousands of college graduates, one thing stands out immediately: women consistently earn less than men, even when they study the same thing and have the same GPA. On average, that difference is about \$2,700 per year.
 
-Looking within your own major category, these patterns highlight whether your field tends to reward men and women similarly or whether a meaningful difference exists. While the exact reasons behind these gaps are complex, the takeaway is clear: gender‑based salary differences do exist, and they don’t look the same across all majors.
+Here's where it gets more interesting. That \$2,700 gap isn't fixed, it stretches wider in some fields and shrinks in others. Think of it like a base price that gets marked up or discounted depending on your industry.
 
-Understanding these patterns can help students make more informed decisions and advocate confidently when entering the job market. Here is a graph that indicates the average difference in salary between men and women for each major.
+In fields like Social Science, the gap is actually smaller than average. But in others, it gets worse. For Business graduates, it's bigger than almost any other field. Women who graduate with a Business degree earn roughly \$4,100 less per year than their male counterparts with the same GPA. That's the base \$2,700 gap, plus an extra \$1,400 penalty that appears to be specific to the Business world.
 
 ```{r}
 #| echo: false
