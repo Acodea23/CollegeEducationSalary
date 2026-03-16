@@ -166,7 +166,7 @@ ggplot(major_diffs_plot, aes(x = MajorCategory, y = diff_M_minus_F, fill = sign)
 
 Our model predicts a graduate’s salary using only three variables—Major, GPA, and Sex—and on average is off by about \$5,700. That tells us that while these factors do matter, there’s a lot more influencing income after college.
 
-Other variables that likely play a role include: Changing industries, Further education (like a master’s degree), Geographic location, Work experience and internships, and Personal interest or satisfaction with the field
+Other variables that likely play a role include: Changing industries, Further education (like a master’s degree), Geographic location, Work experience and internships, and Personal interest or satisfaction with the field. Our model does not explain all the variability in salary because our model has an $R^2$ coefficient of 0.785, which means there is still some unexplained variability that could potentially e related to one of these other factors.
 
 To give one example of how our model performs, we randomly selected a graduate from the dataset: A **female Communications & Journalism major** with a **GPA of 3.76**. - **Predicted salary:** \$81,694 - **Actual salary:** \$77,300 - **Difference:** We over‑estimated by **\$4,394**
 
