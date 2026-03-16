@@ -140,6 +140,8 @@ sal_lm_sex_major <- lm(
 
 summary(sal_lm_sex_major)
 
+levels(sal_df$MajorCategory)
+
 ```
 
 Prediction

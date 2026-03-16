@@ -9,9 +9,27 @@ editor: visual
 
 #### Mathematical Model
 
-$\text{Salary}_i  = \beta_0  + \beta_1 \,\text{Sex}_i + \beta_j \,\text{Major}_{ij} + \beta_3 \,\text{GPA}_i + \varepsilon_i, \qquad  \varepsilon_i \sim \mathcal{N}(0,\sigma^2).$
+**Matrix Form:**
 
-Here the $Major_{ij}$ indicates that the ith quantity for major is the jth major. And $\beta_j$ is the beta coefficient for the jth major
+$$\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon}, \qquad \boldsymbol{\varepsilon} \sim \mathcal{N}(\mathbf{0}, \sigma^2 \mathbf{I})$$
+
+**Where:**
+
+$$\mathbf{y} = \begin{pmatrix} \text{Salary}_1 \\ \text{Salary}_2 \\ \vdots \\ \text{Salary}_n \end{pmatrix}, \qquad \boldsymbol{\beta} = \begin{pmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \\ \beta_3 \\ \beta_4 \end{pmatrix}, \qquad \boldsymbol{\varepsilon} = \begin{pmatrix} \varepsilon_1 \\ \varepsilon_2 \\ \vdots \\ \varepsilon_n \end{pmatrix}$$
+
+**The design matrix** $\mathbf{X}$ is an $n \times 5$ matrix (assuming 3 major categories with one used as the reference):
+
+$$\mathbf{X} = \begin{pmatrix} 1 & \text{Sex}_1 & \text{Major}_{12} & \text{Major}_{13} & \text{GPA}_1 \\ 1 & \text{Sex}_2 & \text{Major}_{22} & \text{Major}_{23} & \text{GPA}_2 \\ \vdots & \vdots & \vdots & \vdots & \vdots \\ 1 & \text{Sex}_n & \text{Major}_{n2} & \text{Major}_{n3} & \text{GPA}_n \end{pmatrix}$$
+
+where each column represents:
+
+\- **Column 1:** Intercept (all 1s)
+
+\- **Column 2:** $\text{Sex}_i$ (e.g., 0 = Female, 1 = Male)
+
+\- **Columns 3–4:** Dummy variables for MajorCategory, where $\text{Major}_{ij} = 1$ if observation $i$ belongs to major $j$, and 0 otherwise (Major 1 serves as the reference category)
+
+\- **Column 5:** $\text{GPA}_i$
 
 #### Prediction Justification
 
